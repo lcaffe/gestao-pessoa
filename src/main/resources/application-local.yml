@@ -1,0 +1,22 @@
+
+#------ DEFINICAO DO AMBIENTE DE PUBLICACAO DA API -------------------------------------------------------
+api: 
+  ambiente-publicacao: LOCAL
+
+#------ CONFIGURACOES DO SPRING --------------------------------------------------------------------------
+spring:         
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:oracle:thin:@scan-ac04.correiosnet.int:1521/ac04
+    username: ppj
+    password: des014ppj 
+
+
+#------ CONFIGURACAO DE LOGGING ---------------------------------------------------------------------------
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    br.com.acme: DEBUG
+  file:
+    name: gestao-pessoa.log

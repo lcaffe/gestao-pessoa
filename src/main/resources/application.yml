@@ -1,0 +1,61 @@
+
+#------ DEFINICAO DA PORTA PADRAO DE ACESSO A API ----------------------------------------------------------------------------------------
+server:
+  port: 9099  # utilize a porta "9" + api.id (numero da api). Tamanho de 4, complete com zero o número da api. 
+  forward-headers-strategy: native
+
+#------ DEFINICOES DAS INFORMACOES DA API QUE SERAO APRESENTADAS NO BOOTADMIN ------------------------------------------------------------
+api: 
+  id: 0 # Quando for para os ambientes de DEV/HOM/PROD informar o código da API registrado no sistema GCS.
+  nome: '@project.name@'
+  versao: '@project.version@'
+  service-id: '@project.artifactId@'
+       
+info:
+  api:
+    id: ${api.id}
+    ambiente: ${api.ambiente-publicacao}
+    git: https://gitlab.correios.com.br/apis/pp/ppms
+    
+#------ CONFIGURACOES RELACIONADAS AO SPRING --------------------------------------------------------------------------------------------- 
+spring:
+  application:
+    name: '@project.artifactId@'
+
+#---------- PROFILE QUE SERA EXECUTADO ---------------------------------------------------------------------------------------------------    
+  profiles:
+    active: local
+
+#---------- CONFIGURACOES JPA ------------------------------------------------------------------------------------------------------------
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.Oracle10gDialect
+      hibernate.jdbc.batch_size: 50
+      hibernate.type: trace
+      hibernate.use_sql_comments: true
+      hibernate.showsql: true      
+      hibernate.format_sql: true   
+
+#---------- CONFIGURACOES DE CONVERSAO JSON --------- ------------------------------------------------------------------------------------    
+  jackson:
+    time-zone: America/Sao_Paulo
+    default-property-inclusion: NON_NULL
+    date-format: "yyyy-MM-dd'T'HH:mm:ss"
+    joda-date-time-format: "yyyy-MM-dd'T'HH:mm:ss"
+    serialization:
+      write-empty-json-arrays: false
+    mapper:
+      accept-case-insensitive-enums: true
+      
+    
+#----------------------------------------------------------------------------------------------------------------------------------
+# Assim como no Spring Boot 2, a maioria dos endpoints não são expostos via http por padrão, nós expomos todos eles. 
+# Para PRODUCAO, você deve escolher cuidadosamente quais endpoints expor.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
