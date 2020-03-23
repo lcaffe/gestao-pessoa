@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.acme.api.gestaopessoa.enums.TipoDocumentoEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +35,7 @@ public class Documento {
 	@JoinColumn(name = "EMP_CO_MATRICULA", insertable = false, updatable = false)
 	private Empregado empregado;
 
-	public Documento(@NotEmpty String matricula, @NotEmpty Long numero, @NotNull TipoDocumentoEnum tipo2) {
-		this.id = new DocumentoPK(matricula, numero, tipo2);
+	public Documento(@NotEmpty String matricula, @NotEmpty Long numero, @NotNull String tipo) {
+		this.id = new DocumentoPK(matricula, numero, tipo);
 	}
 }

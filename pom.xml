@@ -114,7 +114,7 @@
     </dependencyManagement>
 
 
-ndo o build. Copie o trecho abaixo e sobreponha o conteúdo que está no pom.xml do projeto gestao-pessoa:
+
 
 <build>
         <finalName>${project.artifactId}</finalName>
