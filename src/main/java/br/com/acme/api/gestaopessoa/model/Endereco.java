@@ -12,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 @EqualsAndHashCode(of = { "empregado" })
 @NoArgsConstructor
+@Builder
 
 @Entity(name = "ENDERECO")
 public class Endereco implements Serializable {
@@ -52,14 +54,36 @@ public class Endereco implements Serializable {
 	@MapsId
 	private Empregado empregado;
 
-	public Endereco(@NotEmpty String matricula2, @NotEmpty String logradouro2, @NotEmpty String cidade2,
-			@NotEmpty String uf2, @NotEmpty String cep2) {
+	public Endereco(@NotEmpty String matricula, @NotEmpty String logradouro, @NotEmpty String cidade,
+			@NotEmpty String uf, @NotEmpty String cep) {
 
-		this.matricula = matricula2;
-		this.logradouro = logradouro2;
-		this.cidade = cidade2;
-		this.uf = uf2;
-		this.cep = cep2;
+		this.matricula = matricula;
+		this.logradouro = logradouro;
+		this.cidade = cidade;
+		this.uf = uf;
+		this.cep = cep;
 	}
+		
+	/**
+	 * Criado para que o @Builder do lombok funcione.
+	 * @param matricula
+	 * @param logradouro
+	 * @param cidade
+	 * @param uf
+	 * @param cep
+	 * @param empregado
+	 */
+	public Endereco(@NotEmpty String matricula, @NotEmpty String logradouro, @NotEmpty String cidade,
+			@NotEmpty String uf, @NotEmpty String cep, Empregado empregado) {
+		
+		this.matricula = matricula;
+		this.logradouro = logradouro;
+		this.cidade = cidade;
+		this.uf = uf;
+		this.cep = cep;
+		this.empregado = empregado;
+	}
+	
+	
 
 }

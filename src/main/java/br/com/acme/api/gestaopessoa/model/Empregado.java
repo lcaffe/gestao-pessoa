@@ -3,6 +3,7 @@ package br.com.acme.api.gestaopessoa.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @Setter
 @ToString
+@Builder
 @EqualsAndHashCode(of = { "matricula" })
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,12 +51,25 @@ public class Empregado implements Serializable {
 	@Column(name = "EMP_VR_SALARIO")
 	private BigDecimal salario;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EMP_CO_MATRICULA", referencedColumnName = "EMP_CO_MATRICULA")
 	private List<Documento> documentos;
 
 	@OneToOne(mappedBy = "empregado", cascade = CascadeType.ALL)
 	private Endereco endereco;
+	
+	
+	public void adicionaDocumento(Documento documento) {
+		if (this.documentos == null) {
+			this.documentos = new ArrayList<Documento>();
+		}		
+		this.documentos.add(documento);
+	}
 
+	public void removeDocumento(Documento documento) {
+		if (this.documentos != null) {
+			documentos.remove(documento);
+		}
+	}
 }
 

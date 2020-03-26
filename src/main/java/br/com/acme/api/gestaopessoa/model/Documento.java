@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 @EqualsAndHashCode(of = { "id" })
 @NoArgsConstructor
+@Builder
 
 @Entity(name = "DOCUMENTO")
 public class Documento {
@@ -35,7 +37,18 @@ public class Documento {
 	@JoinColumn(name = "EMP_CO_MATRICULA", insertable = false, updatable = false)
 	private Empregado empregado;
 
+	
 	public Documento(@NotEmpty String matricula, @NotEmpty Long numero, @NotNull String tipo) {
-		this.id = new DocumentoPK(matricula, numero, tipo);
+		this.id = new DocumentoPK(numero, matricula, tipo);
+	}
+	
+	/**
+	 * Criado para que o @Builder do lombok funcione
+	 * @param id
+	 * @param empregado
+	 */
+	public Documento(DocumentoPK id, Empregado empregado) {
+		this.id = id;
+		this.empregado = empregado;
 	}
 }

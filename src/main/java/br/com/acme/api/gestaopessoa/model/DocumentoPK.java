@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,22 +19,23 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = { "numero", "matricula", "tipo" })
 @NoArgsConstructor
+@Builder
 
 @Embeddable
 public class DocumentoPK implements Serializable {
 
-	@Column(name = "DOC_NU")
+	@Column(name = "DOC_NU", nullable = false, updatable = false)
 	private Long numero;
 
-	@Column(name = "EMP_CO_MATRICULA")
+	@Column(name = "EMP_CO_MATRICULA", nullable = false, updatable = false)
 	private String matricula;
 
-	@Column(name = "DOC_IN_TIPO")	
+	@Column(name = "DOC_IN_TIPO", nullable = false, updatable = false)	
 	private String tipo;
 
-	public DocumentoPK(@NotBlank String matricula2, @NotBlank Long numero2, String tipo2) {
-		this.numero = numero2;
-		this.matricula = matricula2;
-		this.tipo = tipo2;
+	public DocumentoPK(@NotBlank Long numero, @NotBlank String matricula, @NotBlank String tipo) {
+		this.numero = numero;
+		this.matricula = matricula;
+		this.tipo = tipo;
 	}
 }
