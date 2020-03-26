@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/gestao-pessoa.log
+/mvnw
+/mvnw.cmd
