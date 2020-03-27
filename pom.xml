@@ -56,12 +56,16 @@
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
 
-        <dependency>
+    <!--     <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>jdbc</artifactId>
             <version>${oracle-jdbc.version}</version>
-        </dependency>
+        </dependency> -->
 
+	    <dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		</dependency>
 
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
