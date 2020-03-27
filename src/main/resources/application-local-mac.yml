@@ -1,0 +1,27 @@
+
+#------ DEFINICAO DO AMBIENTE DE PUBLICACAO DA API -------------------------------------------------------
+api: 
+  ambiente-publicacao: LOCAL_MACOS
+
+
+#------ CONFIGURACOES DO SPRING --------------------------------------------------------------------------
+spring:         
+   datasource: 
+       type: com.zaxxer.hikari.HikariDataSource
+       username: ppj
+       password: 123456
+       url: jdbc:mysql://localhost:3306/ppj
+
+   jpa:
+      properties:
+         hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+         hibernate.ddl-auto: update
+
+#------ CONFIGURACAO DE LOGGING ---------------------------------------------------------------------------
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    br.com.acme: DEBUG
+  file:
+    name: gestao-pessoa.log
